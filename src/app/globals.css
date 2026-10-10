@@ -71,3 +71,17 @@ body {
     --whale-ink: #f5c4c7;
     --whale-pleat: #5c3a41;
 }
+
+/* adjective links: an out-arrow appears to the right on hover, nothing else changes */
+.adj-icon {
+    display: inline-block;
+    margin-left: 0.15em;
+    color: rgb(var(--accent-rgb));
+    vertical-align: baseline;
+    opacity: 0;
+    transition: opacity 0.15s ease-in-out;
+}
+
+.adj-link:hover .adj-icon {
+    opacity: 1;
+}
