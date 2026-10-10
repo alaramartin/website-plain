@@ -6,6 +6,18 @@
     --whale-ink: #262325;
     --whale-paper: #f7f4f0;
     --whale-pleat: #d3cdc8;
+    --muted: #525252;
+    --accent-rgb: 163, 0, 44;
+}
+
+.dark {
+    --background: #1a1a1a;
+    --foreground: #ededed;
+    --whale-ink: #e9e1dc;
+    --whale-paper: #2a2a2a;
+    --whale-pleat: #4a4a4a;
+    --muted: #a3a3a3;
+    --accent-rgb: 237, 140, 145;
 }
 
 @theme inline {
@@ -32,8 +44,8 @@ body {
 /* link underline that slides up on hover */
 .link {
     background-image: linear-gradient(
-        rgba(163, 0, 44, 0.4),
-        rgba(163, 0, 44, 0.4)
+        rgba(var(--accent-rgb), 0.4),
+        rgba(var(--accent-rgb), 0.4)
     );
     background-size: 100% 0.1em;
     background-position-y: 100%;
@@ -53,4 +65,9 @@ body {
 .whale-link:hover {
     --whale-ink: #6b1d2f;
     --whale-pleat: #e2b8bd;
+}
+
+.dark .whale-link:hover {
+    --whale-ink: #f5c4c7;
+    --whale-pleat: #5c3a41;
 }

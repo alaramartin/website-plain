@@ -37,7 +37,7 @@ export default function Whale() {
         let lastTime = 0;
         let lastDraw = 0;
         let hovered = false;
-        let pace = 1; // 1 = full swim, eases to 0 while hovered
+        let pace = 1; // 1 = full swim, eases to 0.5 while hovered
         let w = 0;
         let h = 0;
 
@@ -82,7 +82,7 @@ export default function Whale() {
             if (document.hidden || !rig) return;
             const dt = lastTime ? Math.min(time - lastTime, 100) / 1000 : 0;
             lastTime = time;
-            pace += ((hovered ? 0 : 1) - pace) * (1 - Math.exp(-dt * 4));
+            pace += ((hovered ? 0.5 : 1) - pace) * (1 - Math.exp(-dt * 4));
             pod.step(dt * pace);
             place();
             if (time - lastDraw >= PATH_FRAME_MS) {

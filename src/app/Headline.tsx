@@ -5,7 +5,6 @@ import { useEffect, useState } from "react";
 const WORDS = [
     "Alara Martin.",
     "a programmer",
-    "a learner",
     "a hacker",
     "a girl who codes",
     "a photographer",

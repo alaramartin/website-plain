@@ -1,3 +1,4 @@
+import DarkModeToggle from "./DarkModeToggle";
 import Headline from "./Headline";
 import Time from "./Time";
 import Whale from "./Whale";
@@ -11,11 +12,12 @@ export default function Home() {
                 <p className="text-sm">Hi, I&apos;m</p>
                 <Headline />
                 <p className="mt-6 max-w-md">
-                    i&apos;m [blurb. this will be a paragraph, maybe 2-3 lines of
-                    text.]
+                    I study Applied Math and Statistics at UC Berkeley. I also
+                    build things.
                 </p>
             </div>
 
+            <DarkModeToggle />
             <Time />
         </main>
     );
