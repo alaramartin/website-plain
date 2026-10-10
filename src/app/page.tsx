@@ -1,3 +1,4 @@
+import Headline from "./Headline";
 import Time from "./Time";
 import Whale from "./Whale";
 
@@ -8,7 +9,7 @@ export default function Home() {
 
             <div data-whale-avoid className="absolute left-[36%] top-[24%]">
                 <p className="text-sm">Hi, I&apos;m</p>
-                <h1 className="text-7xl">Alara Martin.</h1>
+                <Headline />
                 <p className="mt-6 max-w-md">
                     i&apos;m [blurb. this will be a paragraph, maybe 2-3 lines of
                     text.]
