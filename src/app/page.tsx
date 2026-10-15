@@ -9,7 +9,6 @@ export default function Home() {
             <Whale />
 
             <div data-whale-avoid className="absolute left-[36%] top-[24%]">
-                <p className="text-sm">Hi, I&apos;m</p>
                 <Headline />
                 <p className="mt-6 max-w-md">
                     I study Applied Math and Statistics at UC Berkeley. I also

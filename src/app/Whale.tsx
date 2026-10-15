@@ -131,6 +131,10 @@ export default function Whale() {
             }
         });
         resizeObserver.observe(section);
+        // Text that grows in place (the headline's fan) moves the obstacles without resizing the page.
+        section
+            .querySelectorAll<HTMLElement>("[data-whale-avoid]")
+            .forEach((el) => resizeObserver.observe(el));
 
         return () => {
             disposed = true;
