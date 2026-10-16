@@ -23,7 +23,7 @@ const LINKS: Record<string, string> = {
 };
 
 const REST_MS = 2600; // how long each adjective sits
-const NAME_REST_MS = 6000; // the name lingers longer
+const NAME_REST_MS = 4800; // the name lingers longer
 const FLIP_MS = 800;
 const EASE = "cubic-bezier(0.65, 0, 0.35, 1)";
 
