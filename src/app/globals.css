@@ -38,6 +38,7 @@ body {
 
 body {
     height: 100vh;
+    height: 100dvh; /* the visible screen on phones, not counting the browser's toolbars */
     overflow: hidden;
 }
 
@@ -135,4 +136,32 @@ body {
     .fan-hint {
         animation: none;
     }
+}
+
+/* the bottom-left row: theme toggle, then social links, all quiet until hovered */
+.corner-icon {
+    display: block;
+    color: var(--muted);
+    opacity: 0.7;
+    transition: color 0.15s;
+}
+
+.corner-icon:hover {
+    color: rgb(var(--accent-rgb));
+}
+
+/* the gap after the headline's "a", standing in for a space: a touch tighter on phones */
+:root {
+    --a-gap: 0.24em;
+}
+
+@media (max-width: 47.99rem) {
+    :root {
+        --a-gap: 0.17em;
+    }
+}
+
+.a-gap {
+    display: inline-block;
+    width: var(--a-gap);
 }

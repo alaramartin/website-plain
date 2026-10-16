@@ -20,10 +20,9 @@ export default function DarkModeToggle() {
         <button
             onClick={toggle}
             aria-label={dark ? "Switch to light mode" : "Switch to dark mode"}
-            data-whale-avoid
-            className="absolute bottom-4 left-4 cursor-pointer text-[var(--muted)] opacity-70 transition-colors duration-150 hover:text-[rgb(var(--accent-rgb))]"
+            className="corner-icon cursor-pointer"
         >
-            {dark ? <SunIcon size={20} /> : <MoonIcon size={20} />}
+            {dark ? <SunIcon size={23} /> : <MoonIcon size={23} />}
         </button>
     );
 }

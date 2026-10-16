@@ -1,5 +1,11 @@
 "use client";
-import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import {
+    useEffect,
+    useEffectEvent,
+    useLayoutEffect,
+    useRef,
+    useState,
+} from "react";
 import { ArrowSquareOutIcon } from "@phosphor-icons/react";
 
 // The name, then the adjectives from alaramartin.com's NameCircle. Each one is split into its
@@ -21,8 +27,8 @@ const NAME_REST_MS = 6000; // the name lingers longer
 const FLIP_MS = 800;
 const EASE = "cubic-bezier(0.65, 0, 0.35, 1)";
 
-// The headline shrinks on short screens so the fan has room.
-const HEAD_SIZE = "clamp(2.5rem, 8vh, 4.5rem)";
+// The headline shrinks on short screens so the fan has room...
+const HEAD_SIZE = "clamp(2rem, min(8vh, 10vw), 4.5rem)"; // and on narrow ones, so it fits across
 
 // The fan: like a hand of cards turned on its side, swinging out from behind the pivot word. Every
 // word is a card pivoting about a point to the left of the line, each dealt the same angle further
@@ -33,7 +39,8 @@ const LINE_EM = 1.15;
 const PIVOT_EM = 10;
 const FAN_DEG = 6;
 const SEP_EM = LINE_EM; // a full line, so fanned cards never cover each other
-const FAN_MARGIN_PX = 16; // breathing room left at the screen's top and bottom edges
+const FAN_MARGIN_PX = 16; // breathing room left at the screen's edges
+const FAN_MARGIN_TOP_NARROW_PX = 72; // phones: keep "Hi, I'm" well clear of the top
 
 // The fan opens and closes on a spring, so it can turn around mid-swing from wherever it is.
 const SPRING_K = 230; // stiffness, 1/s^2
@@ -56,15 +63,19 @@ const cardDeg = (slot: number, open: number, { deg, below }: Fan) => {
 };
 
 // How far (in em) a card of width w turned by aDeg reaches past the pivot word's top or bottom
-// edge, and past its left edge to the right.
+// edge, past its left edge to the right, and back past that same edge to the left (turning about
+// a point out to the left swings a card's start a little further left).
 const reach = (w: number, aDeg: number, pivot: number) => {
     const a = (Math.abs(aDeg) * Math.PI) / 180;
     const half = LINE_EM / 2;
     return {
         out: (w + pivot) * Math.sin(a) + half * (Math.cos(a) - 1),
         right: (w + pivot) * Math.cos(a) - pivot + half * Math.sin(a),
+        left: pivot * (1 - Math.cos(a)) + half * Math.sin(a),
     };
 };
+
+type Room = { up: number; down: number; left: number; right: number };
 
 // The fan, top to bottom, when `below` cards go under the pivot word `current`. The adjectives
 // keep their cyclic order around the pivot (wrapping), and "Alara Martin." always sits on top
@@ -97,8 +108,7 @@ function fanOrder(current: number, below: number): number[] {
 function fitFan(
     current: number,
     widthOf: (word: number) => number,
-    up: number,
-    down: number,
+    { up, down, left, right }: Room,
 ): Fan {
     const others = WORDS.length - 1;
     // With an adjective pivot the name is always above it, so at most others - 1 go down.
@@ -114,12 +124,13 @@ function fitFan(
         order.forEach((word, pos) => {
             const slot = pos - at;
             if (slot === 0) return;
-            const r = reach(
-                widthOf(word),
-                Math.abs(slot) * fan.deg,
-                fan.pivot,
-            ).out;
-            over = Math.max(over, r - (slot > 0 ? down : up));
+            const r = reach(widthOf(word), Math.abs(slot) * fan.deg, fan.pivot);
+            over = Math.max(
+                over,
+                r.out - (slot > 0 ? down : up),
+                r.left - left,
+                r.right - right,
+            );
         });
         return over;
     };
@@ -216,12 +227,14 @@ export default function Headline() {
     const [fanned, setFanned] = useState(false);
     const [fitted, setFan] = useState<Fan>(DEFAULT_FAN);
     const [faces, setFaces] = useState<(number | null)[]>([0, 1, null, null]);
-    // Where the spinning part starts: just after "A", or after "a ". Georgia's advances as a
-    // fallback until the real glyphs are measured.
-    const [offsets, setOffsets] = useState({
-        upper: "0.672em",
-        lower: "0.742em",
-    });
+    // Where the spinning part starts: just after "A", or after "a" plus the gap that stands in
+    // for a space (--a-gap, a touch tighter on phones). Georgia's advances as a fallback until
+    // the real glyphs are measured; kept in em so they follow the headline's size.
+    const [glyphs, setGlyphs] = useState({ upper: 0.672, lower: 0.501 });
+    const offsets = {
+        upper: `${glyphs.upper}em`,
+        lower: `calc(${glyphs.lower}em + var(--a-gap))`,
+    };
     // Each card's untransformed width in em, for sizing the box the fan sweeps out.
     const [cardWidths, setCardWidths] = useState<Record<number, number>>({});
     const upperRef = useRef<HTMLSpanElement>(null);
@@ -232,10 +245,15 @@ export default function Headline() {
 
     useLayoutEffect(() => {
         const measure = () => {
-            const upper = upperRef.current?.getBoundingClientRect().width;
-            const lower = lowerRef.current?.getBoundingClientRect().width;
-            if (upper && lower)
-                setOffsets({ upper: `${upper}px`, lower: `${lower}px` });
+            const upper = upperRef.current;
+            const lower = lowerRef.current;
+            if (upper && lower) {
+                const em = parseFloat(getComputedStyle(upper).fontSize);
+                setGlyphs({
+                    upper: upper.getBoundingClientRect().width / em,
+                    lower: lower.getBoundingClientRect().width / em,
+                });
+            }
             const widths: Record<number, number> = {};
             for (const [i, el] of Object.entries(cardRefs.current)) {
                 if (!el) continue;
@@ -333,21 +351,48 @@ export default function Headline() {
         const box = boxRef.current;
         if (box && openRef.current < 0.001) {
             const em = parseFloat(getComputedStyle(box).fontSize);
-            const top = box.getBoundingClientRect().top;
+            const { top, left } = box.getBoundingClientRect();
             const hi = hiRef.current?.offsetHeight ?? 0;
             const blurb = box.nextElementSibling;
             const below = blurb
                 ? blurb.getBoundingClientRect().bottom - (top + LINE_EM * em)
                 : 0;
-            const up = (top - hi - FAN_MARGIN_PX) / em;
+            const narrow = !window.matchMedia("(min-width: 48rem)").matches;
+            const marginTop = narrow ? FAN_MARGIN_TOP_NARROW_PX : FAN_MARGIN_PX;
+            // Sideways the cards may use part of the page's side margin, but on phones keep
+            // the same breathing room as everywhere else.
+            const marginSide = narrow ? FAN_MARGIN_PX : FAN_MARGIN_PX / 4;
+            const up = (top - hi - marginTop) / em;
             const down =
                 (window.innerHeight - FAN_MARGIN_PX - top) / em -
                 LINE_EM -
                 below / em;
-            setFan(fitFan(current, (i) => cardWidths[i] ?? widest, up, down));
+            setFan(
+                fitFan(current, (i) => cardWidths[i] ?? widest, {
+                    up,
+                    down,
+                    left: (left - marginSide) / em,
+                    right: (window.innerWidth - marginSide - left) / em,
+                }),
+            );
         }
         setFanned(true);
     };
+
+    // Touch screens have no hover, so there the fan starts out open (once the cards are measured,
+    // so it's sized right) and tapping the "a" folds it away and back.
+    const autoOpened = useRef(false);
+    const autoOpen = useEffectEvent(() => {
+        if (autoOpened.current) return;
+        autoOpened.current = true;
+        openFan();
+    });
+    useEffect(() => {
+        if (!Object.keys(cardWidths).length) return;
+        if (!window.matchMedia("(hover: none)").matches) return;
+        const id = requestAnimationFrame(autoOpen);
+        return () => cancelAnimationFrame(id);
+    }, [cardWidths]);
 
     // The box the cards sweep out right now, so "Hi, I'm" and the blurb move with them, the whale
     // steers round them, and the hover area covers the gaps between them.
@@ -367,6 +412,7 @@ export default function Headline() {
         <>
             <p
                 ref={hiRef}
+                data-whale-avoid
                 className="text-sm"
                 style={{ translate: `0 calc(${-above} * ${HEAD_SIZE})` }}
             >
@@ -419,7 +465,7 @@ export default function Headline() {
                         ref={lowerRef}
                         className="invisible absolute whitespace-pre"
                     >
-                        {"a "}
+                        a
                     </span>
 
                     <Prism turns={caseFlips(step)}>
@@ -495,7 +541,7 @@ export default function Headline() {
                                     word
                                 ) : (
                                     <>
-                                        a{" "}
+                                        a<span className="a-gap" />
                                         <AdjLink
                                             word={word}
                                             focusable={shown}
