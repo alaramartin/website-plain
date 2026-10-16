@@ -104,8 +104,8 @@ body {
     background-repeat: no-repeat;
 }
 
-/* a breathing dotted underline under the "A"/"a" that opens the fan */
-.fan-hint {
+/* a dotted underline under "Alara Martin." wherever it shows... */
+.dotted {
     background-image: radial-gradient(
         circle,
         rgb(var(--accent-rgb)) 40%,
@@ -114,12 +114,11 @@ body {
     background-size: 0.12em 0.06em;
     background-position: 0 92%;
     background-repeat: repeat-x;
-    animation: fan-hint 2.4s ease-in-out infinite;
 }
 
-.fanned .fan-hint {
-    animation: none;
-    background-image: none;
+/* ...and a glow behind it breathing while it's the word that opens the fan */
+.fan-hint {
+    animation: fan-hint 2.4s ease-in-out infinite;
 }
 
 @keyframes fan-hint {

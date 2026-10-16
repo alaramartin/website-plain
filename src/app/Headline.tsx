@@ -478,12 +478,20 @@ export default function Headline() {
                         a
                     </span>
 
+                    {/* One dotted underline (and glow) under the whole name while it's the anchor,
+                        so the dots run unbroken across the "A" and the rest. The glow stops once
+                        the fan is out. */}
+                    <span
+                        aria-hidden
+                        className={`dotted absolute inset-y-0 left-0 ${fanned ? "" : "fan-hint"}`}
+                        style={{
+                            width: `${cardWidths[0] ?? widest}em`,
+                            opacity: current === 0 ? 1 : 0,
+                            transition: `opacity ${FLIP_MS}ms ease-in-out`,
+                        }}
+                    />
                     <Prism turns={caseFlips(step)}>
-                        {(k) => (
-                            <span className="fan-hint">
-                                {k % 2 === 0 ? "A" : "a"}
-                            </span>
-                        )}
+                        {(k) => (k % 2 === 0 ? "A" : "a")}
                     </Prism>
                     <Prism
                         turns={step}
@@ -546,7 +554,7 @@ export default function Headline() {
                                 }}
                             >
                                 {i === 0 ? (
-                                    word
+                                    <span className="dotted">{word}</span>
                                 ) : (
                                     <>
                                         a<span className="a-gap" />
