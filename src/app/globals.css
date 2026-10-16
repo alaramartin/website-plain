@@ -165,3 +165,102 @@ body {
     display: inline-block;
     width: var(--a-gap);
 }
+
+/* scrollable without a visible scrollbar */
+.no-scrollbar {
+    scrollbar-width: none;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+    display: none;
+}
+
+/* the hacks feed fades out under the nav and the corners */
+.feed-fade {
+    mask-image: linear-gradient(
+        transparent,
+        black 3.5rem,
+        black calc(100% - 4rem),
+        transparent
+    );
+}
+
+/* hack post links: grey, turning red on hover */
+.hack-link {
+    transition: color 0.15s;
+}
+
+.hack-link:hover {
+    color: rgb(var(--accent-rgb));
+}
+
+/* carousel arrows: only on hover, only where there's a mouse */
+.carousel-arrow {
+    position: absolute;
+    top: 50%;
+    display: grid;
+    place-items: center;
+    width: 1.75rem;
+    height: 1.75rem;
+    border-radius: 9999px;
+    background: color-mix(in srgb, var(--background) 80%, transparent);
+    color: var(--muted);
+    opacity: 0;
+    transform: translateY(-50%);
+    transition:
+        opacity 0.15s,
+        color 0.15s;
+    cursor: pointer;
+}
+
+.group:hover .carousel-arrow {
+    opacity: 1;
+}
+
+.carousel-arrow:hover {
+    color: rgb(var(--accent-rgb));
+}
+
+@media (hover: none) {
+    .carousel-arrow {
+        display: none;
+    }
+}
+
+.carousel-dot {
+    width: 5px;
+    height: 5px;
+    border-radius: 9999px;
+    background: var(--muted);
+    opacity: 0.3;
+    transition:
+        opacity 0.15s,
+        background-color 0.15s;
+    cursor: pointer;
+}
+
+.carousel-dot[aria-current="true"] {
+    background: rgb(var(--accent-rgb));
+    opacity: 1;
+}
+
+/* the play button over a video's thumbnail */
+.video-play {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    display: grid;
+    place-items: center;
+    width: 3.25rem;
+    height: 3.25rem;
+    padding-left: 2px; /* the triangle looks centered when nudged right */
+    border-radius: 9999px;
+    background: color-mix(in srgb, var(--background) 85%, transparent);
+    color: var(--foreground);
+    transform: translate(-50%, -50%);
+    transition: color 0.15s;
+}
+
+.video-thumb:hover .video-play {
+    color: rgb(var(--accent-rgb));
+}
