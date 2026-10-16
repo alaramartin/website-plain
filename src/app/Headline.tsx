@@ -212,6 +212,7 @@ function AdjLink({
             rel="noopener noreferrer"
             tabIndex={focusable ? 0 : -1}
             className="adj-link"
+            data-fan-trigger
             onPointerEnter={() => onHold?.(true)}
             onPointerLeave={() => onHold?.(false)}
         >
@@ -454,6 +455,15 @@ export default function Headline() {
                         height: "1.15em",
                         perspective: "1000px",
                     }}
+                    // Hovering any of the word itself opens the fan, not the blank space after it.
+                    onPointerOver={(e) => {
+                        if (
+                            e.pointerType === "mouse" &&
+                            !fanned &&
+                            (e.target as Element).closest("[data-fan-trigger]")
+                        )
+                            openFan();
+                    }}
                 >
                     <span
                         ref={upperRef}
@@ -483,7 +493,7 @@ export default function Headline() {
                             const i = faces[k];
                             if (i === null) return null;
                             return i === 0 ? (
-                                rest(i)
+                                <span data-fan-trigger>{rest(i)}</span>
                             ) : (
                                 <AdjLink
                                     word={WORDS[i]}
@@ -494,16 +504,14 @@ export default function Headline() {
                         }}
                     </Prism>
 
-                    {/* The leading letter is what opens the fan. */}
+                    {/* Covers the leading letter; on touch screens tapping it opens and folds the fan. */}
                     <span
                         aria-hidden
+                        data-fan-trigger
                         className="absolute inset-y-0 left-0 cursor-default"
                         style={{
                             width:
                                 current === 0 ? offsets.upper : offsets.lower,
-                        }}
-                        onPointerEnter={(e) => {
-                            if (e.pointerType === "mouse") openFan();
                         }}
                         onPointerDown={(e) => {
                             if (e.pointerType !== "mouse") {
