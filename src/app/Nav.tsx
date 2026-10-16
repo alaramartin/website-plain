@@ -23,7 +23,7 @@ export default function Nav() {
                         key={href}
                         href={href}
                         aria-current={current ? "page" : undefined}
-                        className={current ? undefined : "underline underline-offset-2"}
+                        className={current ? undefined : "underline decoration-[var(--muted)]/50 decoration-[1.5px] underline-offset-[3px]"}
                     >
                         {label}
                     </Link>
