@@ -512,14 +512,18 @@ export default function Headline() {
                         }}
                     </Prism>
 
-                    {/* Covers the leading letter; on touch screens tapping it opens and folds the fan. */}
+                    {/* On touch screens tapping this opens and folds the fan. It covers the whole
+                        name while that's the anchor, but only the "a" before an adjective, so the
+                        adjective itself stays a link. */}
                     <span
                         aria-hidden
                         data-fan-trigger
                         className="absolute inset-y-0 left-0 cursor-default"
                         style={{
                             width:
-                                current === 0 ? offsets.upper : offsets.lower,
+                                current === 0
+                                    ? `${cardWidths[0] ?? widest}em`
+                                    : offsets.lower,
                         }}
                         onPointerDown={(e) => {
                             if (e.pointerType !== "mouse") {
