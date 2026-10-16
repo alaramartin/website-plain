@@ -14,7 +14,7 @@ export default function Nav() {
     return (
         <nav
             data-whale-avoid
-            className="absolute left-1/2 top-4 flex -translate-x-1/2 gap-5 font-mono text-base text-[var(--muted)] opacity-70"
+            className="absolute left-1/2 top-4 flex -translate-x-1/2 gap-4 font-mono text-sm text-[var(--muted)] opacity-70"
         >
             {TABS.map(({ label, href }) => {
                 const current = pathname === href;
@@ -23,7 +23,7 @@ export default function Nav() {
                         key={href}
                         href={href}
                         aria-current={current ? "page" : undefined}
-                        className={current ? undefined : "link"}
+                        className={current ? undefined : "underline underline-offset-2"}
                     >
                         {label}
                     </Link>
