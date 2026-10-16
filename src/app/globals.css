@@ -263,3 +263,12 @@ body {
 .video-thumb:hover .video-play {
     color: rgb(var(--accent-rgb));
 }
+
+/* the other top nav tabs: plain grey, turning red on hover */
+.nav-link {
+    transition: color 0.15s;
+}
+
+.nav-link:hover {
+    color: rgb(var(--accent-rgb));
+}
