@@ -21,7 +21,7 @@ export const HACKS: Hack[] = [
         date: "2026-10",
         event: "paradigm frontiers",
         caption:
-            'Tab predicts your next action on your Mac and shows it as a gray "ghost": press Tab to do it. When the next step is a paywall, the ghost becomes a payment, and Tab checks the amount matches the page before it pays.',
+            "Built Tab, an autocomplete for your entire Mac. It predicts your next action using TypeSafe's Jev and pays in one keypress on Tempo.",
         media: [
             {
                 type: "video",
@@ -47,17 +47,17 @@ export const HACKS: Hack[] = [
         event: "b@bhacks 2.0",
         result: "2nd most creative",
         caption:
-            "Cash Cow: put money behind any task with a deadline. An AI referee gathers the evidence itself, rules pass or fail, and posts the verdict on-chain, and stakes from missed tasks go to the people who finished.",
+            "Cash Cow: an accountability platform where users stake AUSD on their own deadlines and others bet on the outcome. AI agents verify task completion directly from GitHub and Canvas.",
         media: [
-            {
-                type: "image",
-                src: "/hacks/bab-1.png",
-                alt: "Hackers working at B@BHacks 2.0",
-            },
             {
                 type: "image",
                 src: "/hacks/bab-2.png",
                 alt: "The Cash Cow team on stage at B@BHacks 2.0",
+            },
+            {
+                type: "image",
+                src: "/hacks/bab-1.png",
+                alt: "Hackers working at B@BHacks 2.0",
             },
         ],
         aspect: "3/2",
@@ -71,9 +71,9 @@ export const HACKS: Hack[] = [
     {
         date: "2026-09",
         event: "mantisgrid ai infrastructure",
-        result: "grand prize winner",
+        result: "1st place grand prize",
         caption:
-            "ORIGIN, a root-cause analysis agent for GPU cluster errors. It beat the in-house engineers' solution at $0 per case: a deterministic engine ranks the suspects, and every number it reports is traced back to the raw telemetry.",
+            "ORIGIN: a root-cause analysis agent for GPU cluster failures that builds a dependency graph from raw telemetry. Beat the sponsor's solution at $0 inference cost.",
         media: [
             {
                 type: "image",
@@ -95,10 +95,10 @@ export const HACKS: Hack[] = [
     },
     {
         date: "2026-09",
-        event: "live models",
+        event: "live models by visko",
         result: "2nd place overall",
         caption:
-            "SafePath: type two addresses and a time, and it generates a video of you walking that route at night, starting from real street-level photos with the lighting and weather modelled from open data. So a walk somewhere new at night feels a little less unfamiliar.",
+            "SafePath: a Next.js/FastAPI tool that renders any walking route as night-time video, fusing OpenStreetMap routing, Mapillary imagery, streetlight outages, and weather.",
         media: [
             {
                 type: "image",
@@ -123,7 +123,7 @@ export const HACKS: Hack[] = [
         event: "nozomio",
         result: "best use of tensorlake",
         caption:
-            "UX Agent watches how real users move through a website (rage clicks, drop-offs, exit paths) and opens pull requests that fix what's driving them away, without anyone writing the product code.",
+            "UX Agent: an AI agent pipeline that watches real PostHog feature analytics and autonomously ships UI updates informed by real user data.",
         media: [
             {
                 type: "image",
