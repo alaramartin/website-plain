@@ -16,7 +16,7 @@ export default function Time() {
     return (
         <p
             data-whale-avoid
-            className="absolute bottom-4 right-4 font-mono text-base text-[var(--muted)] opacity-70"
+            className="absolute bottom-4 right-4 font-mono text-[0.85rem] text-[var(--muted)] opacity-70"
         >
             it&apos;s{" "}
             <a

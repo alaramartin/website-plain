@@ -1,13 +1,13 @@
-import DarkModeToggle from "./DarkModeToggle";
+import Corners from "./Corners";
 import Headline from "./Headline";
-import Socials from "./Socials";
-import Time from "./Time";
+import Nav from "./Nav";
 import Whale from "./Whale";
 
 export default function Home() {
     return (
         <main className="relative h-dvh overflow-hidden">
             <Whale />
+            <Nav />
 
             <div
                 data-whale-avoid
@@ -20,18 +20,7 @@ export default function Home() {
                 </p>
             </div>
 
-            <div
-                data-whale-avoid
-                className="absolute bottom-4 left-4 flex items-center gap-3.5"
-            >
-                <DarkModeToggle />
-                <span
-                    aria-hidden
-                    className="h-[18px] w-px bg-[var(--muted)] opacity-40"
-                />
-                <Socials />
-            </div>
-            <Time />
+            <Corners />
         </main>
     );
 }
