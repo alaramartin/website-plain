@@ -53,7 +53,7 @@ export default function MostRecentCommit() {
                     href={
                         commit
                             ? commit.url
-                            : "https://github.com/alaramartin/website"
+                            : "https://github.com/alaramartin/website-plain"
                     }
                     target="_blank"
                     rel="noopener noreferrer"

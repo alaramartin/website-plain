@@ -10,7 +10,7 @@ import TextScramble from "../components/TextScramble";
 export const metadata = generateMetadataBase({
     title: "Writing",
     description: "My writing.",
-    url: "https://alaramartin.com/writing",
+    url: "https://me.alaramartin.com/writing",
 });
 
 interface Frontmatter {

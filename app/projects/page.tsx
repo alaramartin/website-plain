@@ -20,7 +20,7 @@ const sortedProjects = [
 export const metadata = generateMetadataBase({
     title: "Projects",
     description: "A timeline of my projects.",
-    url: "https://alaramartin.com/projects",
+    url: "https://me.alaramartin.com/projects",
 });
 
 export default function ProjectsPage() {

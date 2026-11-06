@@ -15,7 +15,7 @@ export async function generateMetadata({ params }: PageProps) {
         return generateMetadataBase({
             title: "Review not found",
             description: "This book review doesn't exist.",
-            url: `https://alaramartin.com/reviews/${slug}`,
+            url: `https://me.alaramartin.com/reviews/${slug}`,
             ogLabel: "Reviews",
         });
     }
@@ -23,7 +23,7 @@ export async function generateMetadata({ params }: PageProps) {
     return generateMetadataBase({
         title: book.title,
         description: `My review of ${book.title} by ${book.author}.`,
-        url: `https://alaramartin.com/reviews/${slug}`,
+        url: `https://me.alaramartin.com/reviews/${slug}`,
         ogLabel: "Reviews",
     });
 }

@@ -10,14 +10,14 @@ export default function generateMetadataBase(
     // writing-piece page). Only set it where you want that kicker.
     ogLabel?: string}
 ): Metadata {
-    const ogImageUrl = `https://alaramartin.com/og?title=${encodeURIComponent(title || "")}`
+    const ogImageUrl = `https://me.alaramartin.com/og?title=${encodeURIComponent(title || "")}`
         + (ogLabel ? `&label=${encodeURIComponent(ogLabel)}` : "");
     return {
         title: title ? title + " | Alara Martin" : "Alara Martin",
         description: description ?? "",
-        authors: [{ name: "Alara Martin", url: "https://alaramartin.com" }],
+        authors: [{ name: "Alara Martin", url: "https://me.alaramartin.com" }],
         keywords: keywords?.length ? keywords : ["Alara Martin", "dev", "developer", "portfolio", "website"],
-        metadataBase: new URL("https://alaramartin.com"),
+        metadataBase: new URL("https://me.alaramartin.com"),
         alternates: {
             canonical: url,
         },

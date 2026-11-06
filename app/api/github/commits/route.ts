@@ -6,9 +6,9 @@ export async function GET() {
         auth: process.env.GITHUB_TOKEN
     });
 
-    const res = await octokit.request('GET /repos/alaramartin/website/commits', {
+    const res = await octokit.request('GET /repos/alaramartin/website-plain/commits', {
         owner: 'alaramartin',
-        repo: 'website',
+        repo: 'website-plain',
         headers: {
             'X-GitHub-Api-Version': '2022-11-28'
         }

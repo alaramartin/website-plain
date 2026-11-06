@@ -8,7 +8,7 @@ import BookShelf from "./components/BookShelf";
 export const metadata = generateMetadataBase({
     title: "Reviews",
     description: "Books I've read and what I thought.",
-    url: "https://alaramartin.com/reviews",
+    url: "https://me.alaramartin.com/reviews",
     ogLabel: "Reviews",
 });
 

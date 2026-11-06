@@ -138,8 +138,8 @@ export const projects: ProjectInfo[] = [
     },
     {
         name: "Website",
-        githubLink: "https://github.com/alaramartin/website",
-        href: "https://alaramartin.com",
+        githubLink: "https://github.com/alaramartin/website-plain",
+        href: "https://me.alaramartin.com",
         // miniDescription: "ts (this) website",
         description: "ts (this) website",
         notes: [
@@ -173,8 +173,8 @@ export const projects: ProjectInfo[] = [
     },
     {
         name: "Yet Another Personal Website",
-        githubLink: "https://github.com/alaramartin/website-plain",
-        href: "https://me.alaramartin.com",
+        githubLink: "https://github.com/alaramartin/website",
+        href: "https://alaramartin.com",
         miniDescription:
             "Another personal website, because two weren't enough.",
         description: "Another personal website, because two weren't enough.",

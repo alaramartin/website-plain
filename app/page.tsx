@@ -13,7 +13,7 @@ import type { ReactNode } from "react";
 
 export const metadata = generateMetadataBase({
     description: "My personal website.",
-    url: "https://alaramartin.com",
+    url: "https://me.alaramartin.com",
 });
 
 // A small heading shared by the proof panels, matching the section headings.

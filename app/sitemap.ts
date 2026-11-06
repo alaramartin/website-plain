@@ -3,13 +3,13 @@ import type { MetadataRoute } from 'next'
 export default function sitemap(): MetadataRoute.Sitemap {
   return [
     {
-      url: 'https://alaramartin.com',
+      url: 'https://me.alaramartin.com',
     },
     {
-      url: 'https://alaramartin.com/projects',
+      url: 'https://me.alaramartin.com/projects',
     },
     {
-      url: 'https://alaramartin.com/contact',
+      url: 'https://me.alaramartin.com/contact',
     },
   ]
 }

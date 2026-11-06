@@ -16,7 +16,7 @@ import TextScramble from "../components/TextScramble";
 export const metadata = generateMetadataBase({
     title: "Contact Me",
     description: "Contact me.",
-    url: "https://alaramartin.com/contact",
+    url: "https://me.alaramartin.com/contact",
 });
 
 const contactLinks: {
@@ -51,8 +51,8 @@ const contactLinks: {
     },
     // {
     //     contactType: "Website",
-    //     href: "https://alaramartin.com",
-    //     username: "alaramartin.com",
+    //     href: "https://me.alaramartin.com",
+    //     username: "me.alaramartin.com",
     //     icon: GlobeIcon,
     // },
     {
